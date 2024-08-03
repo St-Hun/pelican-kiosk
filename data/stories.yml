@@ -14,9 +14,9 @@ stories:
   - action: utter_your_email
   - intent: my_email
     entities:
-      - email: "ashus3868@gmail.com"
+      - email: "tkdgns277@gmail.com"
   - slot_was_set:
-      - email: "ashus3868@gmail.com"
+      - email: "tkdgna277@gmail.com"
   - action: action_send_mail
 
 - story: happy path

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pelican Kiosk</title>
+    <title>Document</title>
     <link
       rel="stylesheet"
       href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -11,21 +11,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./dist/css/style.css" />
-    <style>
-      .rw-conversation-container .rw-header {
-        background-color: hsl(250, 69%, 61%);
-      }
-      .rw-conversation-container .rw-messages-container .rw-message .rw-client {
-        background-color: hsl(250, 69%, 61%);
-      }
-      .rw-launcher {
-        background-color: hsl(250, 69%, 61%);
-      }
-      .rw-conversation-container .rw-reply {
-        background-color: hsl(250, 69%, 61%);
-        border: 1px solid hsl(250, 69%, 61%);
-      }
-    </style>
+    <script defer src="dist/js/bundle.js"></script>
   </head>
 
   <body>
@@ -133,7 +119,26 @@
         <div class="btn-group"></div>
         <div class="menu-modal-container">
           <ul class="modal">
-            <!-- Example list items -->
+            <!-- <li class="modal-item">
+            <figure>
+              <img class="modal-img"
+                src="https://cdn.shopify.com/s/files/1/0273/4535/4826/products/coldbrew_69e25680-9a16-41ed-ad47-e42d7b201b6a.jpg?v=1587042356">
+              <div>
+                <figcaption class="modal-title">아이스 아메리카노</figcaption>
+                <span class="modal-price">2000원</span>
+              </div>
+            </figure>
+          </li>
+          <li class="modal-item">
+            <button class="btn btn-size-up"><i class="fa fa-coffee" aria-hidden="true"></i> 사이즈 업</button>
+            <span class="size-up-price">1000원</span>
+            <button class="btn btn-addshot"><i class="fa fa-coffee" aria-hidden="true"></i> 샷 추가</button>
+            <span class="size-up-price">1000원</span>
+          </li>
+          <li class="modal-item">
+            <button class="btn-order">주문 담기</button>
+            <button class="btn-close">취소</button>
+          </li> -->
           </ul>
         </div>
       </div>
@@ -189,37 +194,8 @@
         </div>
       </div>
     </footer>
-
-    <div id="rasa-chat-widget"></div>
+    <!-- RASA Chat Widget -->
+    <div id="rasa-chat-widget" data-websocket-url=" https://19fe-221-146-62-69.ngrok-free.app"></div>
     <script src="https://unpkg.com/@rasahq/rasa-chat" type="application/javascript"></script>
-
-    <script>
-      (function() {
-        let e = document.createElement("script"),
-          t = document.head || document.getElementsByTagName("head")[0];
-        (e.src = "https://cdn.jsdelivr.net/npm/rasa-webchat/lib/index.js"),
-          (e.async = true),
-          (e.onload = () => {
-            window.WebChat.default(
-              {
-                customData: { language: "en" }, // Custom data
-                socketUrl: "https://abcd-1234.ngrok-free.app", // Replace with your actual ngrok URL
-                title: 'Lifeeazy',
-                subtitle: 'Say hi and get started!',
-                initPayload: '/greet',
-                profileAvatar: "https://img.icons8.com/fluency/344/chatbot.png",
-                openLauncherImage: "./assets/svg/comment.svg",
-                closeImage: "./assets/svg/down.svg",
-                showMessageDate: true,
-                inputTextFieldHint: "Type 'Hi' to start the conversation",
-                embedded: true,
-              },
-              null
-            );
-          }),
-          t.insertBefore(e, t.firstChild);
-      })();
-      localStorage.clear();
-    </script>
   </body>
 </html>
