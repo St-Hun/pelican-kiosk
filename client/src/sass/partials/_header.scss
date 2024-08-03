@@ -1,0 +1,230 @@
+.start-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  z-index: 1000;
+  background-color: white; /* 필요 시 추가 */
+}
+
+.header {
+  position: relative;
+  width: 960px;
+  height: 140px;
+  margin: 0 auto;
+  padding: 0 15px;
+  background-color: #3E69FF;
+  color: #fff;
+  text-align: center;
+}
+
+.header-container {
+  display: grid;
+  margin: 0 10px;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 70px;
+}
+
+.trans {
+  background-color: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.header button {
+  box-shadow: none;
+  border: 0;
+}
+
+.btn-home {
+  cursor: pointer;
+  grid-column: 1/2;
+  padding-right: 70px;
+  font-size: 3rem;
+}
+
+.btn-dev {
+  cursor: pointer;
+  grid-column: 5/6;
+  padding-left: 70px;
+  font-size: 3rem;
+}
+
+.header i {
+  font-size: 2rem;
+}
+
+.home {
+  grid-column: 2/5;
+  margin-top: 15px;
+  font-size: 2rem;
+  user-select: none;
+}
+
+.menu-tab {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.tab-list {
+  height: 50px;
+  width: 30%;
+  padding: 20px 35px;
+  border: 0;
+  border-radius: 15px 15px 0 0;
+}
+
+.btn-active {
+  background-color: #eee;
+  color: #000000;
+}
+
+
+
+
+
+.dev-modal-container {
+  position: fixed;
+  display: flex;
+  // display: none;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vw;
+  background: rgba(0, 0, 0, .3);
+  opacity: 0;
+  z-index: -10;
+  transition: 0.3s;
+
+  &.active {
+    opacity: 1;
+    z-index: 99;
+  }
+
+  .dev-modal-text {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 15px 0 15px 0;
+    color: #3E69FF;
+  }
+
+  .dev-modal {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+    background: #fff;
+    border: 2px solid gray;
+    border-radius: 10px;
+    margin-bottom: 30%;
+    transform: translate(0, -150px);
+
+    .dev-modal-heading {
+      font-size: 2.0rem;
+      font-weight: bold;
+      color: #3E69FF;
+      margin: 15px 0 15px 0;
+    }
+
+    .input-price {
+      width: 70px;
+    }
+
+    .dev-modal-input {
+      width: 360px;
+      color: #000000;
+      text-align: left;
+      font-weight: 700;
+      line-height: 2rem;
+      margin: 15px 0 15px 0;
+
+      span {
+        color: #3E69FF;
+        font-size: 12px;
+        position: relative;
+        opacity: 0;
+      }
+
+      .is-valid span {
+        opacity: 1;
+      }
+
+      div {
+        display: flex;
+        margin: 0;
+
+
+        label {
+          flex: 1;
+          font-size: 17px;
+          color: gray;
+
+          &::after {
+            content: '*';
+            color: #3E69FF;
+            margin-left: 5px;
+          }
+        }
+
+
+        .dev-shot {
+          height: 30px;
+          width: 30px;
+        }
+
+        input {
+          flex: 2 1 0;
+          outline: none;
+          padding: 5px 15px;
+          border: none;
+          border-bottom: 2px solid #aaa;
+
+          font: {
+            size: 18px;
+            padding: 5px;
+          }
+        }
+
+      }
+    }
+  }
+
+  .dev-modal-btn {
+    margin: 10px 0 15px 0;
+    padding-top: 20px;
+    width: 390px;
+    display: flex;
+    justify-content: space-around;
+
+    button {
+      width: 100px;
+      height: 40px;
+      border: 0;
+      border-radius: 10px;
+      color: #ffffff;
+      background: #3E69FF;
+
+      font: {
+        size: 25px;
+        weight: 700;
+      }
+
+      &:disabled {
+        background: #eee;
+
+      }
+    }
+  }
+}
