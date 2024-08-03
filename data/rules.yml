@@ -1,4 +1,4 @@
-version: "2.0"
+version: "3.1"
 
 rules:
 
@@ -12,18 +12,18 @@ rules:
   - intent: pincode
   - action: slot_pincode_form
   - active_loop: slot_pincode_form
+  - slot_was_set:
+    - requested_slot: "pincode"
+  - action: action_listen
 
 - rule: Submit pincode form
   condition:
-  # Condition that form is active.
   - active_loop: slot_pincode_form
   steps:
-  # Form is deactivated
   - action: slot_pincode_form
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-  # The actions we want to run when the form is submitted.
   - action: action_pincode_submit
 
 - rule: Activate district form
@@ -31,18 +31,18 @@ rules:
   - intent: district
   - action: slot_district_form
   - active_loop: slot_district_form
+  - slot_was_set:
+    - requested_slot: "district_id"
+  - action: action_listen
 
 - rule: Submit district form
   condition:
-  # Condition that form is active.
   - active_loop: slot_district_form
   steps:
-  # Form is deactivated
   - action: slot_district_form
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-  # The actions we want to run when the form is submitted.
   - action: action_district_submit
 
 - rule: Activate location form
@@ -50,16 +50,16 @@ rules:
   - intent: location
   - action: slot_location_form
   - active_loop: slot_location_form
+  - slot_was_set:
+    - requested_slot: "lattitude"
+  - action: action_listen
 
 - rule: Submit location form
   condition:
-  # Condition that form is active.
   - active_loop: slot_location_form
   steps:
-  # Form is deactivated
   - action: slot_location_form
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-  # The actions we want to run when the form is submitted.
   - action: action_location_submit
