@@ -1,4 +1,4 @@
-version: "2.0"
+version: "3.1"  # Rasa 3.x에 맞게 버전 정보 업데이트
 
 nlu:
 - intent: greet
@@ -63,9 +63,9 @@ nlu:
 
 - intent: my_email
   examples: |
-    - my email id is [ashus3868@gmail.com]{"entity":"email"}
-    - this is my email id [ashus3868@gmail.com]{"entity":"email"}
-    - [ashus3868@gmail.com]{"entity":"email"}
+    - my email id is [tkdgns277@gmail.com](email)
+    - this is my email id [tkdgns277@gmail.com](email)
+    - [tkdgns2778@gmail.com](email)
 
 - intent: restart
   examples: |

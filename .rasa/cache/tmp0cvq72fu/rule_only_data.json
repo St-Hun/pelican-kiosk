@@ -1,0 +1,10 @@
+{
+  "rule_only_slots": [
+    "requested_slot"
+  ],
+  "rule_only_loops": [
+    "slot_location_form",
+    "slot_district_form",
+    "slot_pincode_form"
+  ]
+}

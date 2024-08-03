@@ -1,4 +1,4 @@
-version: "2.0"
+version: "3.1"  # Rasa 3.x에 맞게 버전 정보 업데이트
 
 stories:
 
@@ -16,15 +16,15 @@ stories:
     entities:
       - email: "tkdgns277@gmail.com"
   - slot_was_set:
-      - email: "tkdgna277@gmail.com"
+      - email: "tkdgns277@gmail.com"
   - action: action_send_mail
 
-- story: happy path
+- story: goodbye path
   steps:
   - intent: deny
   - action: utter_goodbye
 
 - story: restart
   steps:
-    - intent: restart
-    - action: action_restart
+  - intent: restart
+  - action: action_restart
