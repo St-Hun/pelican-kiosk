@@ -28,3 +28,10 @@ stories:
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+- story: transfer money
+  steps:
+    - intent: transfer_money
+    - action: utter_ask_recipient
+    - action: utter_ask_amount
+    - action: utter_transfer_complete

@@ -8,6 +8,15 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - transfer_money  # 이 의도가 있다고 가정합니다
+
+slots:
+  recipient:
+    type: text
+    influence_conversation: true
+  amount:
+    type: float
+    influence_conversation: true
 
 responses:
   utter_greet:
@@ -28,6 +37,17 @@ responses:
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
+
+  utter_transfer_complete:
+  - text: "The transfer has been completed successfully."
+  
+  utter_ask_recipient:
+    - text: "Who would you like to transfer money to?"
+  utter_ask_amount:
+    - text: "How much would you like to transfer?"
+
+actions:
+  - utter_transfer_complete
 
 session_config:
   session_expiration_time: 60

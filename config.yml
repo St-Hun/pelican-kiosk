@@ -1,60 +1,38 @@
-# Rasa Configuration File
+version: "3.0"
 
-recipe: default.v1
-
-# 고유한 assistant ID 설정
-assistant_id: "hunbal"
-
-# 언어 설정
 language: en
 
-# NLU 파이프라인 구성
 pipeline:
-  - name: WhitespaceTokenizer
-    case_sensitive: False  # 대소문자 구분 비활성화
-  - name: RegexFeaturizer
-    case_sensitive: False  # 대소문자 구분 비활성화
-  - name: LexicalSyntacticFeaturizer
-  - name: CountVectorsFeaturizer
-    OOV_token: "[UNK]"  # Out-of-Vocabulary 토큰 설정
-    stop_words: null  # 불용어 설정 (필요시 사용)
-    min_ngram: 1
-    max_ngram: 3
-  - name: CountVectorsFeaturizer
-    analyzer: char_wb
-    min_ngram: 3
-    max_ngram: 5
-  - name: DIETClassifier
-    epochs: 100
-    constrain_similarities: true
-    model_confidence: linear_norm  # 모델 신뢰도 설정
-    use_masked_language_model: true  # 마스크된 언어 모델 사용
-  - name: EntitySynonymMapper
-  - name: ResponseSelector
-    epochs: 100
-    constrain_similarities: true
-    retrieval_intent: default  # 기본 회신 선택자 설정
-  - name: FallbackClassifier
-    threshold: 0.3
-    ambiguity_threshold: 0.1
-  - name: LanguageModelFeaturizer
-    model_name: bert  # BERT 모델 사용
-    model_weights: bert-base-uncased
+- name: WhitespaceTokenizer
+- name: RegexFeaturizer
+- name: LexicalSyntacticFeaturizer
+- name: CountVectorsFeaturizer
+- name: CountVectorsFeaturizer
+  analyzer: char_wb
+  min_ngram: 1
+  max_ngram: 4
+- name: LanguageModelFeaturizer
+  model_name: "bert"    # or "gpt", "roberta", etc.
+  model_weights: "bert-base-uncased"    # or other model weights available
+- name: DIETClassifier
+  epochs: 300
+  constrain_similarities: true
+- name: EntitySynonymMapper
+- name: ResponseSelector
+  epochs: 300
+  constrain_similarities: true
+- name: FallbackClassifier
+  threshold: 0.3
+  ambiguity_threshold: 0.1
 
-# Rasa Core 정책 구성
 policies:
-  - name: MemoizationPolicy
-    max_history: 5  # 메모리 최대 기록 설정
-  - name: RulePolicy
-    core_fallback_threshold: 0.4  # 코어 폴백 임계값
-    core_fallback_action_name: "action_default_fallback"
-    enable_fallback_prediction: True
-  - name: UnexpecTEDIntentPolicy
-    max_history: 5
-    epochs: 100
-    # Unexpected intent를 감지하는 설정
-  - name: TEDPolicy
-    max_history: 5
-    epochs: 200
-    constrain_similarities: true
-    model_confidence: linear_norm
+- name: MemoizationPolicy
+- name: RulePolicy
+- name: UnexpecTEDIntentPolicy
+  max_history: 0
+  epochs: 300
+- name: TEDPolicy
+  max_history: 0
+  epochs: 300
+  constrain_similarities: true
+assistant_id: 20240804-170458-yummy-marina
