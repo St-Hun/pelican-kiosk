@@ -1,55 +1,60 @@
-# Configuration for Rasa NLU.
-# https://rasa.com/docs/rasa/nlu/components/
+# Rasa Configuration File
+
+recipe: default.v1
+
+# 고유한 assistant ID 설정
+assistant_id: "hunbal"
+
+# 언어 설정
 language: en
 
-pipeline: null
-# # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
-# # If you'd like to customize it, uncomment and adjust the pipeline.
-# # See https://rasa.com/docs/rasa/tuning-your-model for more information.
-#   - name: WhitespaceTokenizer
-#   - name: RegexFeaturizer
-#   - name: LexicalSyntacticFeaturizer
-#   - name: CountVectorsFeaturizer
-#   - name: CountVectorsFeaturizer
-#     analyzer: char_wb
-#     min_ngram: 1
-#     max_ngram: 4
-#   - name: DIETClassifier
-#     epochs: 100
-#     constrain_similarities: true
-#   - name: EntitySynonymMapper
-#   - name: ResponseSelector
-#     epochs: 100
-#     constrain_similarities: true
-#   - name: FallbackClassifier
-#     threshold: 0.3
-#     ambiguity_threshold: 0.1
+# NLU 파이프라인 구성
+pipeline:
+  - name: WhitespaceTokenizer
+    case_sensitive: False  # 대소문자 구분 비활성화
+  - name: RegexFeaturizer
+    case_sensitive: False  # 대소문자 구분 비활성화
+  - name: LexicalSyntacticFeaturizer
+  - name: CountVectorsFeaturizer
+    OOV_token: "[UNK]"  # Out-of-Vocabulary 토큰 설정
+    stop_words: null  # 불용어 설정 (필요시 사용)
+    min_ngram: 1
+    max_ngram: 3
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 3
+    max_ngram: 5
+  - name: DIETClassifier
+    epochs: 100
+    constrain_similarities: true
+    model_confidence: linear_norm  # 모델 신뢰도 설정
+    use_masked_language_model: true  # 마스크된 언어 모델 사용
+  - name: EntitySynonymMapper
+  - name: ResponseSelector
+    epochs: 100
+    constrain_similarities: true
+    retrieval_intent: default  # 기본 회신 선택자 설정
+  - name: FallbackClassifier
+    threshold: 0.3
+    ambiguity_threshold: 0.1
+  - name: LanguageModelFeaturizer
+    model_name: bert  # BERT 모델 사용
+    model_weights: bert-base-uncased
 
-# Configuration for Rasa Core.
-# https://rasa.com/docs/rasa/core/policies/
-policies: null
-# # No configuration for policies was provided. The following default policies were used to train your model.
-# # If you'd like to customize them, uncomment and adjust the policies.
-# # See https://rasa.com/docs/rasa/policies for more information.
-#   - name: MemoizationPolicy
-#   - name: RulePolicy
-#   - name: UnexpecTEDIntentPolicy
-#     max_history: 5
-#     epochs: 100
-#   - name: TEDPolicy
-#     max_history: 5
-#     epochs: 100
-#     constrain_similarities: true
-assistant_id: 20240804-054132-level-thinner
-# # No configuration for policies was provided. The following default policies were used to train your model.
-# # If you'd like to customize them, uncomment and adjust the policies.
-# # See https://rasa.com/docs/rasa/policies for more information.
-#   - name: MemoizationPolicy
-#   - name: RulePolicy
-#   - name: UnexpecTEDIntentPolicy
-#     max_history: 5
-#     epochs: 100
-#   - name: TEDPolicy
-#     max_history: 5
-#     epochs: 100
-#     constrain_similarities: true
+# Rasa Core 정책 구성
+policies:
+  - name: MemoizationPolicy
+    max_history: 5  # 메모리 최대 기록 설정
+  - name: RulePolicy
+    core_fallback_threshold: 0.4  # 코어 폴백 임계값
+    core_fallback_action_name: "action_default_fallback"
+    enable_fallback_prediction: True
+  - name: UnexpecTEDIntentPolicy
+    max_history: 5
+    epochs: 100
+    # Unexpected intent를 감지하는 설정
+  - name: TEDPolicy
+    max_history: 5
+    epochs: 200
+    constrain_similarities: true
+    model_confidence: linear_norm

@@ -1,117 +1,34 @@
-version: '3.1'
+version: "3.1"
 
-config:
-  store_entities_as_slots: true
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
 
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
-intents:
-  - greet
-  - affirm
-  - deny
-  - bot_challenge
-  - pincode
-  - location
-  - district
-  - my_email
-  - restart
-
-entities:
-  - email
-  - pincode
-  - date
-  - lattitude
-  - longitude
-  - district_id
-
-slots:
-  pincode:
-    type: text
-    mappings:
-      - type: from_entity
-        entity: pincode
-  date:
-    type: text
-    mappings:
-      - type: from_entity
-        entity: date
-  lattitude:
-    type: text
-    mappings:
-      - type: from_entity
-        entity: lattitude
-  longitude:
-    type: text
-    mappings:
-      - type: from_entity
-        entity: longitude
-  district_id:
-    type: text
-    mappings:
-      - type: from_entity
-        entity: district_id
-  email:
-    type: text
-    mappings:
-      - type: from_entity
-        entity: email
-  requested_slot:
-    type: text
-    mappings:
-      - type: from_text
-
-responses:
-  utter_greet:
-    - text: "Hey! Welcome to LifeEazy CoWin Vaccine Notifier. I am here to help you find the available slots near you for the Vaccination"
-  utter_How_slots:
-    - text: "How do you want to check for the slots availability?"
-      buttons:
-        - title: "By Pincode"
-          payload: /pincode
-        - title: "By District Id"
-          payload: /district
-        - title: "By Location(lat-lon)"
-          payload: /location
-  utter_ask_pincode:
-    - text: "Enter your pincode"
-  utter_ask_district_id:
-    - text: "Enter your district id"
-  utter_ask_longitude:
-    - text: "Enter your longitude"
-  utter_ask_lattitude:
-    - text: "Enter your lattitude"
-  utter_ask_date:
-    - text: "Enter the date you want to check for in the given format 'DD-MM-YYYY'"
-  utter_your_email:
-    - text: "Enter your email id."
-  utter_goodbye:
-    - text: "Thank you for your time."
-  utter_iamabot:
-    - text: "I am a bot, powered by Rasa."
-
-actions:
-  - action_location_submit
-  - action_district_submit
-  - action_pincode_submit
-  - action_send_mail
-  - action_restart
-
-forms:
-  slot_pincode_form:
-    required_slots:
-      - pincode
-      - date
-
-  slot_district_form:
-    required_slots:
-      - district_id
-      - date
-
-  slot_location_form:
-    required_slots:
-      - lattitude
-      - longitude
-
-e2e_actions: []

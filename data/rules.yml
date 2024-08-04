@@ -2,64 +2,12 @@ version: "3.1"
 
 rules:
 
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
 - rule: Say 'I am a bot' anytime the user challenges
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
-
-- rule: Activate pincode form
-  steps:
-  - intent: pincode
-  - action: slot_pincode_form
-  - active_loop: slot_pincode_form
-  - slot_was_set:
-    - requested_slot: "pincode"
-  - action: action_listen
-
-- rule: Submit pincode form
-  condition:
-  - active_loop: slot_pincode_form
-  steps:
-  - action: slot_pincode_form
-  - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
-  - action: action_pincode_submit
-
-- rule: Activate district form
-  steps:
-  - intent: district
-  - action: slot_district_form
-  - active_loop: slot_district_form
-  - slot_was_set:
-    - requested_slot: "district_id"
-  - action: action_listen
-
-- rule: Submit district form
-  condition:
-  - active_loop: slot_district_form
-  steps:
-  - action: slot_district_form
-  - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
-  - action: action_district_submit
-
-- rule: Activate location form
-  steps:
-  - intent: location
-  - action: slot_location_form
-  - active_loop: slot_location_form
-  - slot_was_set:
-    - requested_slot: "lattitude"
-  - action: action_listen
-
-- rule: Submit location form
-  condition:
-  - active_loop: slot_location_form
-  steps:
-  - action: slot_location_form
-  - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
-  - action: action_location_submit
